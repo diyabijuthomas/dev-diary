@@ -34,5 +34,32 @@ def hourglassSum(arr):
     return max_hourglass
 #note that u use float('-inf') to initiate max, since negative sum can be also max value
 
+# #3 STDIN    Function
+# -----    --------
+# 2 5      size of arr[] n = 2, size of queries[] q = 5
+# 1 0 5    queries = [[1,0,5],[1,1,7],[1,0,3],[2,1,0],[2,1,1]]
+# 1 1 7
+# 1 0 3
+# 2 1 0
+# 2 1 1
+# output 
+# 7
+# 3
 
+def dynamicArray(n, queries):
+    # Write your code here
+    arr=[[] for _ in range (n)]
+    lastAnswer=0
+    result=[]
+    for i in queries:
+        q,x,y=i
+        idx=(x ^ lastAnswer)%n
+        if q==1:
+            arr[idx].append(y)
+        elif q==2:
+            lastAnswer=arr[idx][y %len(arr[idx])]
+            result.append(lastAnswer)
+    return result
+
+#major insight is that u can define the values in a list as a,b, c = i, effectively unpacking it
 
